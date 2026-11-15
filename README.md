@@ -6,9 +6,6 @@ Staatliche Fachschule für Elektrotechnik, Jakob-Preh-Schule Bad Neustadt a. d. 
 
 **Live:** <https://flowthetensor.github.io/Linienplan-ITec/>
 
-## Für wen?
-
-Für die Schülerinnen und Schüler. Das [Dashboard Lernsituationen](https://nerdifant.de/Dashboard-Lernsituationen/) bleibt die Linksammlung für die Lehrkraft. Der Linienplan zeigt den Ablauf des Fachs und den eigenen Fortschritt.
 
 ## Die drei Linien
 
