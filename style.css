@@ -1,0 +1,900 @@
+/* =====================================================================
+   Corporate Design der Jakob-Preh-Schule (bsnes.de)
+   Papierweiß, Logo-Schwarz, Schul-Rot als Akzent, Senf als 2. Akzent
+   Schriften: Quicksand (Titel), Inter (Text), JetBrains Mono (Zahlen)
+   ===================================================================== */
+:root {
+  --bg: #fbf9f5;
+  --surface: #ffffff;
+  --surface-2: #f3eee6;
+  --ink: #1d1d1c;
+  --ink-soft: #5b5852;
+  --ink-faint: #7d7a72;
+  --accent: #c81e3a;
+  --accent-dark: #a5182f;
+  --senf: #b87a1c;
+  --gruen: #348054;
+  --line: #e7e1d6;
+  --line-soft: #efeae1;
+  --radius: 12px;
+  --mono: "JetBrains Mono", Consolas, monospace;
+  --titel: Quicksand, Arial, Helvetica, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  background: var(--line-soft);
+  color: var(--ink);
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+a {
+  color: var(--accent);
+}
+
+/* ---------------- Kopf ---------------- */
+.kopf {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 10px 24px;
+  background: var(--surface);
+  border-bottom: 4px solid var(--accent);
+}
+.logo img {
+  display: block;
+  width: 122px;
+  height: auto;
+}
+.kopf-text {
+  flex: 1;
+  min-width: 0;
+}
+.kopf h1 {
+  margin: 0;
+  font-family: var(--titel);
+  font-weight: 700;
+  font-size: 1.55rem;
+  line-height: 1.2;
+}
+.kopf p {
+  margin: 2px 0 0;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+}
+.zaehler {
+  display: flex;
+  gap: 10px;
+}
+.zahlfeld {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 96px;
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg);
+  font-family: var(--mono);
+  color: var(--ink-soft);
+}
+.zahlfeld b {
+  font-size: 1.35rem;
+  color: var(--ink);
+}
+.zahlfeld small {
+  font-family: Inter, Arial, sans-serif;
+  font-size: 0.72rem;
+  color: var(--ink-faint);
+}
+
+/* ---------------- Seite ---------------- */
+.seite {
+  max-width: 1720px;
+  margin: 0 auto;
+  padding: 18px 24px 8px;
+}
+.einleitung {
+  display: grid;
+  grid-template-columns: minmax(280px, 1.1fr) auto;
+  gap: 8px 32px;
+  align-items: start;
+  margin-bottom: 14px;
+}
+.einleitung > p {
+  margin: 0;
+  max-width: 62ch;
+  color: var(--ink-soft);
+}
+.legende-linien, .legende-symbole {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.legende-linien li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.92rem;
+}
+.legende-linien small {
+  color: var(--ink-faint);
+}
+.strich {
+  display: inline-block;
+  width: 30px;
+  height: 7px;
+  border-radius: 4px;
+}
+.legende-symbole {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 20px;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+.legende-symbole li {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.sym {
+  display: inline-block;
+  border: 3px solid var(--ink);
+  background: #fff;
+}
+.sym.ls {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+}
+.sym.kurs {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+}
+.sym.info {
+  width: 10px;
+  height: 10px;
+  border-width: 2.5px;
+  border-radius: 50%;
+}
+.sym.hub {
+  width: 26px;
+  height: 14px;
+  border-radius: 4px;
+  border-width: 2.5px;
+}
+.sym.nachweis {
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0 7px;
+  border-radius: 9px;
+}
+
+/* ---------------- Panels ---------------- */
+.raster-haupt {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  grid-template-areas:
+    "karte rack"
+    "detail rack";
+  gap: 16px;
+  align-items: start;
+}
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 2px 12px rgba(29, 29, 28, 0.06);
+  overflow: hidden;
+}
+.panel-kopf, .detail-kopf {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  height: 38px;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+  font-family: var(--titel);
+  font-weight: 700;
+  font-size: 1rem;
+}
+.panel-kopf small {
+  margin-left: auto;
+  font-family: Inter, Arial, sans-serif;
+  font-weight: 400;
+  font-size: 0.8rem;
+  color: var(--ink-faint);
+}
+.punkt {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex: none;
+}
+.karte {
+  grid-area: karte;
+}
+.rack {
+  grid-area: rack;
+  position: sticky;
+  top: 12px;
+}
+.detail {
+  grid-area: detail;
+  min-height: 220px;
+}
+
+/* ---------------- Linienplan ---------------- */
+.plan-scroll {
+  overflow-x: auto;
+}
+.plan {
+  min-width: 1040px;
+  padding: 4px 6px 0;
+}
+.plan svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  font-family: Inter, Arial, sans-serif;
+}
+.raster {
+  stroke: var(--line-soft);
+  stroke-width: 1.5;
+}
+.raster.halbjahr {
+  stroke: var(--line);
+  stroke-width: 2;
+  stroke-dasharray: 6 5;
+}
+.achse {
+  stroke: var(--line);
+  stroke-width: 2;
+}
+.monat {
+  font-family: var(--titel);
+  font-weight: 700;
+  font-size: 15px;
+  fill: var(--ink-soft);
+  text-anchor: middle;
+}
+.halbjahr-text {
+  font-size: 12px;
+  fill: var(--ink-faint);
+}
+.heute line {
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-dasharray: 3 4;
+  opacity: 0.55;
+}
+.heute text {
+  fill: var(--accent);
+  font-size: 12px;
+  font-weight: 700;
+  text-anchor: middle;
+}
+.nachweis rect {
+  fill: var(--accent);
+}
+.nachweis text {
+  fill: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  text-anchor: middle;
+}
+.nachweis:focus {
+  outline: none;
+}
+.nachweis:focus rect {
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+.linie, .linie-schatten {
+  fill: none;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.linie {
+  stroke-width: 9;
+}
+.linie-schatten {
+  stroke: #fff;
+  stroke-width: 15;
+}
+.wegtext {
+  font-size: 12px;
+  font-style: italic;
+  text-anchor: middle;
+}
+
+.station {
+  cursor: pointer;
+  outline: none;
+}
+.ziel-flaeche {
+  fill: transparent;
+}
+.station .info {
+  fill: #fff;
+  stroke-width: 4;
+}
+.ring-grund {
+  fill: #fff;
+  stroke: var(--line);
+  stroke-width: 4;
+}
+.ring circle, .ring path {
+  fill: none;
+  stroke: var(--senf);
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+.station.fertig .ring circle {
+  stroke: var(--gruen);
+}
+.knopf {
+  stroke-width: 4.5;
+}
+.haken {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.zahl {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 700;
+  fill: var(--ink-soft);
+  text-anchor: middle;
+}
+.label {
+  font-size: 14px;
+  font-weight: 600;
+  fill: var(--ink);
+  paint-order: stroke;
+  stroke: #fff;
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+.label.klein {
+  font-size: 12.5px;
+  font-weight: 400;
+  fill: var(--ink-soft);
+}
+.station:hover .label, .station:focus-visible .label, .station.gewaehlt .label {
+  fill: var(--accent);
+}
+.station:focus-visible .ring-grund, .station.gewaehlt .ring-grund {
+  stroke: var(--ink);
+}
+.station.gewaehlt .info, .station:focus-visible .info {
+  stroke: var(--ink) !important;
+}
+.station:hover .knopf, .station.gewaehlt .knopf {
+  stroke-width: 6;
+}
+.puls {
+  fill: none;
+  stroke-width: 3;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: puls 1.8s ease-out infinite;
+}
+@keyframes puls {
+  0% { opacity: 0.8; transform: scale(0.85); }
+  100% { opacity: 0; transform: scale(1.45); }
+}
+
+/* Laborserver-Knoten */
+.hub rect {
+  fill: #fff;
+  stroke: var(--ink);
+  stroke-width: 3.5;
+}
+.hub .led {
+  fill: #c9c3b8;
+}
+.hub-kopf {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  fill: var(--ink-faint);
+  text-anchor: middle;
+}
+.hub-zeile {
+  font-family: var(--titel);
+  font-size: 14px;
+  font-weight: 700;
+  fill: var(--ink);
+  text-anchor: middle;
+}
+.hub.online rect {
+  fill: var(--ink);
+}
+.hub.online .led {
+  fill: #5fd38a;
+  filter: drop-shadow(0 0 3px #5fd38a);
+}
+.hub.online .hub-kopf {
+  fill: #b9b4aa;
+}
+.hub.online .hub-zeile {
+  fill: #fff;
+}
+.station:hover .hub rect, .station.gewaehlt .hub rect, .station:focus-visible .hub rect {
+  stroke: var(--accent);
+}
+
+/* ---------------- Detail ---------------- */
+.detail-inhalt {
+  padding: 14px 20px 18px;
+}
+.linienkopf {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--ink-faint);
+}
+.linienpunkt {
+  width: 22px;
+  height: 6px;
+  border-radius: 3px;
+}
+.detail h2 {
+  margin: 4px 0 0;
+  font-family: var(--titel);
+  font-size: 1.4rem;
+}
+.detail h2 .kurz {
+  font-weight: 500;
+  color: var(--ink-soft);
+}
+.zeit {
+  margin: 0 0 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--senf);
+}
+.detail p {
+  margin: 0 0 10px;
+  max-width: 85ch;
+}
+.material {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+.fortschritt {
+  font-size: 0.92rem;
+}
+.siegelliste {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 6px 14px;
+  margin: 0 0 12px;
+  padding: 0;
+  list-style: none;
+}
+.siegelliste li {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--bg);
+  color: var(--ink-faint);
+  font-size: 0.88rem;
+}
+.siegelliste li.hat {
+  color: var(--ink);
+  border-color: #cfe3d6;
+  background: #f1f8f3;
+}
+.siegelliste li > span:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+.siegelliste small {
+  font-size: 0.75rem;
+  color: var(--ink-faint);
+}
+.siegel {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border: 2.5px dashed #c9c3b8;
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 700;
+}
+.siegel.hat {
+  border: 2.5px solid var(--gruen);
+  background: var(--gruen);
+  color: #fff;
+}
+.guertel {
+  flex: none;
+  width: 30px;
+  height: 10px;
+  border-radius: 3px;
+  background: var(--g);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.18);
+}
+.guertel.leer {
+  opacity: 0.22;
+}
+.siegelliste li.bonus {
+  border-style: dashed;
+}
+.chip {
+  display: inline-block;
+  padding: 1px 9px;
+  border-radius: 10px;
+  background: var(--surface-2);
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+  font-style: normal;
+  font-weight: 600;
+}
+.siegelliste .chip {
+  margin-left: auto;
+}
+.beitrag {
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+}
+.hubstatus {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 12px;
+  border-radius: 9px;
+  background: var(--surface-2);
+  font-size: 0.9rem;
+}
+.hubstatus .led, .einschub .led {
+  flex: none;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #c9c3b8;
+}
+.hubstatus.an {
+  background: #e7f3eb;
+}
+.hubstatus.an .led {
+  background: #3fbf6f;
+  box-shadow: 0 0 6px #5fd38a;
+}
+.haken-feld {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin: 2px 0 12px;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--bg);
+  font-weight: 600;
+  cursor: pointer;
+}
+.haken-feld input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--gruen);
+}
+.aktionen {
+  margin-top: 4px;
+}
+.knopf {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+.knopf:hover {
+  border-color: var(--ink-faint);
+}
+.knopf.primaer {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+.knopf.primaer:hover {
+  background: var(--accent-dark);
+}
+
+/* ---------------- Rack ---------------- */
+.rack-inhalt {
+  padding: 14px 16px 16px;
+}
+.host {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--ink-faint);
+}
+.host-feld {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 3px;
+  padding: 7px 10px;
+  border-radius: 8px;
+  background: var(--ink);
+  font-family: var(--mono);
+}
+.prompt {
+  color: #5fd38a;
+}
+.host input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #f4f1ea;
+  font-family: var(--mono);
+  font-size: 0.9rem;
+}
+.host input::placeholder {
+  color: #8d887f;
+}
+.rack-status {
+  margin: 12px 0 8px;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+.einschuebe {
+  margin: 0;
+  padding: 8px;
+  list-style: none;
+  border-radius: 10px;
+  background: #2a2a28;
+  box-shadow: inset 0 0 0 3px #3a3a37;
+}
+.einschub + .einschub {
+  margin-top: 6px;
+}
+.einschub details {
+  border-radius: 6px;
+  background: #3b3b38;
+  color: #e9e5dc;
+}
+.einschub summary {
+  display: grid;
+  grid-template-columns: 26px 14px 1fr 60px;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  list-style: none;
+  cursor: pointer;
+}
+.einschub summary::-webkit-details-marker {
+  display: none;
+}
+.einschub summary:focus-visible {
+  outline: 2px solid var(--senf);
+  outline-offset: 1px;
+  border-radius: 6px;
+}
+.einschub .u {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: #8d887f;
+}
+.einschub .led {
+  background: #57544e;
+}
+.einschub.teil .led {
+  background: #e3a33a;
+  box-shadow: 0 0 5px #e3a33a;
+  animation: blinken 1.6s steps(2, jump-none) infinite;
+}
+.einschub.an .led {
+  background: #5fd38a;
+  box-shadow: 0 0 6px #5fd38a;
+}
+@keyframes blinken {
+  50% { opacity: 0.35; }
+}
+.einschub-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  min-width: 0;
+}
+.einschub-text b {
+  font-size: 0.9rem;
+}
+.einschub-text small {
+  font-size: 0.72rem;
+  color: #a7a298;
+}
+.einschub.an .einschub-text small {
+  color: #8fdcab;
+}
+.balken {
+  height: 6px;
+  border-radius: 3px;
+  background: #57544e;
+  overflow: hidden;
+}
+.balken i {
+  display: block;
+  height: 100%;
+  background: #e3a33a;
+}
+.einschub.an .balken i {
+  background: #5fd38a;
+}
+.einschub-mehr {
+  padding: 0 12px 10px 48px;
+  font-size: 0.82rem;
+}
+.einschub-mehr p {
+  margin: 0 0 6px;
+  color: #c9c4ba;
+}
+.einschub-mehr ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.einschub-mehr li {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 3px 0;
+  border-top: 1px solid #4a4a46;
+  font-family: var(--mono);
+  font-size: 0.76rem;
+  color: #a7a298;
+}
+.einschub-mehr li.hat {
+  color: #8fdcab;
+}
+.einschub-mehr .link, .einschub-mehr .ohne-link {
+  padding: 0;
+  border: none;
+  background: none;
+  color: #f4f1ea;
+  font-family: Inter, Arial, sans-serif;
+  font-size: 0.8rem;
+  text-align: left;
+  cursor: pointer;
+}
+.einschub-mehr .ohne-link {
+  cursor: default;
+  color: #c9c4ba;
+}
+.einschub-mehr .link:hover {
+  text-decoration: underline;
+}
+.rack-hinweis {
+  margin: 10px 0 0;
+  font-size: 0.8rem;
+  color: var(--ink-faint);
+}
+
+/* ---------------- Speicher, Fuß, Toast ---------------- */
+.speicher-info {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 18px;
+  margin: 16px 0 0;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+.speicher-info p {
+  flex: 1 1 520px;
+  margin: 0;
+}
+.speicher-info .warnung {
+  flex-basis: 100%;
+  padding: 8px 12px;
+  border-radius: 9px;
+  background: #fbe7ea;
+  color: var(--accent-dark);
+  font-weight: 600;
+}
+.fuss {
+  padding: 18px 24px 26px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--ink-faint);
+}
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translate(-50%, calc(100% + 40px));
+  visibility: hidden;
+  padding: 10px 18px;
+  border-radius: 10px;
+  background: var(--ink);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
+  transition: transform 0.35s ease, visibility 0.35s;
+  pointer-events: none;
+}
+.toast.zeigen {
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+/* ---------------- schmale Bildschirme ---------------- */
+@media (max-width: 1180px) {
+  .raster-haupt {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "karte"
+      "detail"
+      "rack";
+  }
+  .rack {
+    position: static;
+  }
+  .einleitung {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 720px) {
+  .kopf {
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    padding: 10px 14px;
+  }
+  .logo img {
+    width: 96px;
+  }
+  .kopf h1 {
+    font-size: 1.25rem;
+  }
+  .zaehler {
+    width: 100%;
+  }
+  .zahlfeld {
+    flex: 1;
+  }
+  .seite {
+    padding: 12px 12px 6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .puls, .einschub.teil .led {
+    animation: none;
+  }
+  .toast {
+    transition: none;
+  }
+}
