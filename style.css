@@ -851,6 +851,23 @@ a {
   transform: translate(-50%, 0);
 }
 
+/* Ansicht ohne Siegel (Lehrkraft) */
+.ohne-siegel .raster-haupt {
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "karte"
+    "detail";
+}
+.stufenliste {
+  margin: 0 0 12px;
+  padding-left: 1.4em;
+  columns: 2 240px;
+  font-size: 0.92rem;
+}
+.stufenliste small {
+  color: var(--ink-faint);
+}
+
 /* ---------------- schmale Bildschirme ---------------- */
 @media (max-width: 1180px) {
   .raster-haupt {

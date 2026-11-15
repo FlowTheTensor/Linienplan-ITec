@@ -121,8 +121,15 @@ function leseQuelle(qid) {
 }
 
 function leseAlles() {
-  speicherOk = pruefeSpeicher();
   stand = {};
+  if (P.ohneSiegel) {
+    speicherOk = true;
+    Object.keys(P.quellen).forEach((qid) => {
+      stand[qid] = {};
+    });
+    return;
+  }
+  speicherOk = pruefeSpeicher();
   Object.keys(P.quellen).forEach((qid) => {
     stand[qid] = leseQuelle(qid);
   });
@@ -180,6 +187,9 @@ function ausbauVon(st) {
 
 // nächster offener Halt: erste Station in zeitlicher Reihenfolge mit offenem Ziel
 function naechsterHalt() {
+  if (P.ohneSiegel) {
+    return null;
+  }
   const offen = P.stationen
     .filter((st) => st.siegel && !stationsStand(st).fertig)
     .sort((a, b) => a.monat - b.monat);
@@ -284,7 +294,7 @@ function zeichneStation(st, istHalt) {
   const x = X(st.monat);
   const y = Y(st.spur);
   const farbe = st.linie ? P.linien[st.linie].farbe : "#1d1d1c";
-  const z = stationsStand(st);
+  const z = P.ohneSiegel ? null : stationsStand(st);
   const klassen = ["station", "typ-" + st.typ];
   if (gewaehlt === st.id) {
     klassen.push("gewaehlt");
@@ -304,7 +314,7 @@ function zeichneStation(st, istHalt) {
   t.push(`<title>${esc(titel)}</title>`);
 
   if (st.typ === "hub") {
-    const on = hubOnline(st);
+    const on = !P.ohneSiegel && hubOnline(st);
     t.push(`<g class="hub${on ? " online" : ""}">`);
     t.push(`<rect x="${x - 56}" y="${y - 23}" width="112" height="46" rx="10" />`);
     t.push(`<circle class="led" cx="${x - 42}" cy="${y}" r="4.5" />`);
@@ -399,13 +409,18 @@ function zeichneDetail() {
   if (!st) {
     st = naechsterHalt();
     ueberschrift = st ? "Dein nächster offener Halt" : "";
+    if (!st && P.ohneSiegel) {
+      box.innerHTML = `<div class="detail-kopf"><span class="punkt"></span>Station</div>
+        <div class="detail-inhalt"><p>Klick auf eine Station im Plan, um Inhalt, Zeitraum und Stufen zu sehen.</p></div>`;
+      return;
+    }
     if (!st) {
       box.innerHTML = `<div class="detail-kopf"><span class="punkt"></span>Alles geschafft</div>
         <div class="detail-inhalt"><h2>Alle Siegel sind gesammelt</h2><p>Stark! Dein Laborserver ist komplett ausgebaut. Klick auf eine Station, um nachzulesen, worum es dort ging.</p></div>`;
       return;
     }
   }
-  const z = stationsStand(st);
+  const z = P.ohneSiegel ? null : stationsStand(st);
   const teile = [];
   teile.push(`<div class="detail-kopf"><span class="punkt"></span>${ueberschrift ? esc(ueberschrift) : "Station"}</div>`);
   teile.push(`<div class="detail-inhalt">`);
@@ -419,12 +434,24 @@ function zeichneDetail() {
     teile.push(`<p class="material"><b>Material:</b> ${esc(st.material)}</p>`);
   }
 
-  if (st.typ === "hub") {
+  if (st.typ === "hub" && !P.ohneSiegel) {
     const on = hubOnline(st);
     const stufen = ausbauVon(st);
     teile.push(`<p class="hubstatus ${on ? "an" : ""}"><span class="led"></span>${on ? "Bereit: Alle nötigen Einschübe sind online." : `Noch nicht bereit. Dafür muss ${stufen.map((u) => `„${esc(u.name)}“`).join(", ")} online sein.`}</p>`);
   }
 
+  if (P.ohneSiegel && st.siegel) {
+    const q = P.quellen[st.siegel.quelle];
+    if (q.art !== "manuell") {
+      const ids = st.siegel.ids || q.stufen.map((x) => x.id);
+      const ziel = st.siegel.ziel || ids;
+      const namen = ids.map((id) => {
+        const stufe = q.stufen.find((x) => x.id === id);
+        return `<li>${esc(stufe.name)}${stufe.rang ? ` <small>(${esc(stufe.rang)})</small>` : ""}${ziel.includes(id) ? "" : ` <em class="chip">${esc(st.siegel.zusatz || "Bonus")}</em>`}</li>`;
+      });
+      teile.push(`<p class="fortschritt"><b>${q.wort}:</b></p><ol class="stufenliste">${namen.join("")}</ol>`);
+    }
+  }
   if (z) {
     const q = P.quellen[st.siegel.quelle];
     if (q.art === "manuell") {
@@ -574,6 +601,9 @@ function aktualisiere() {
   leseAlles();
   zeichnePlan();
   zeichneDetail();
+  if (P.ohneSiegel) {
+    return;
+  }
   const staende = zeichneRack();
   zeichneZaehler();
   meldeNeues(staende);
@@ -598,6 +628,18 @@ function start() {
   $("#untertitel").textContent = P.untertitel;
   $("#einleitung").textContent = P.einleitung;
   zeichneLegende();
+  if (P.ohneSiegel) {
+    document.body.classList.add("ohne-siegel");
+    aktualisiere();
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && gewaehlt) {
+        gewaehlt = null;
+        zeichnePlan();
+        zeichneDetail();
+      }
+    });
+    return;
+  }
   starteHost();
   aktualisiere();
 

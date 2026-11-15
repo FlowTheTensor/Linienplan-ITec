@@ -1,12 +1,10 @@
 # Linienplan Informationstechnik · Dein Weg zum Laborserver
 
-Das Schuljahr als Liniennetz: Drei Linien – **Programmieren**, **Systeme** und **Netze** – führen von September bis Juli durch alle Lernsituationen und Kurse. Sie treffen sich an den Knoten des Leitprojekts: **Laborserver v1** im Februar, **Laborserver v2** im Juni und der **Abnahme** im Juli. Jede Station zeigt, wie viele Prüfsiegel oder Dojo-Gürtel schon gesammelt sind. Die Siegel bauen ein Server-Rack mit sechs Einschüben aus, bis der Laborserver zur Abnahme bereit ist.
+Das Schuljahr als Liniennetz: Drei Linien – **Programmieren**, **Systeme** und **Netze** – führen durch alle Lernsituationen und Kurse. Sie treffen sich an den Knoten des Leitprojekts: **Laborserver Version 1**, **Laborserver Version 2** und der **Abnahme**. Jede Station zeigt, wie viele Prüfsiegel oder Dojo-Gürtel schon gesammelt sind. Die Siegel bauen ein Server-Rack mit sechs Einschüben aus, bis der Laborserver zur Abnahme bereit ist.
 
 Staatliche Fachschule für Elektrotechnik, Jakob-Preh-Schule Bad Neustadt a. d. Saale ([bsnes.de](https://www.bsnes.de)) · Fach Informationstechnik (ITec) · 1. Schuljahr
 
 **Live:** <https://flowthetensor.github.io/Linienplan-ITec/>
-
-**Variante ohne Zeitangaben:** <https://flowthetensor.github.io/Linienplan-ITec/ohne-zeit.html> – ohne Monate, Leistungsnachweise und „heute“-Markierung. Alle drei Linien beginnen gleich weit links, Dojo · Seriell liegt auf der Netz-Linie und die Netz-Stationen sind gleichmäßig verteilt.
 
 ## Für wen?
 
@@ -16,11 +14,11 @@ Für die Schülerinnen und Schüler. Das [Dashboard Lernsituationen](https://ner
 
 | Linie | Lerngebiet | Stationen |
 |---|---|---|
-| Programmieren (rot) | LG 3 Algorithmen entwickeln und codieren | C++-Einstieg, Algorithmen-Koch, Schleifen, Tresorknacker I, Funktionen, Arrays und Structs, Tresorknacker II, Dateiarbeit, Tresorknacker III → Laborserver v2 |
-| Systeme (blau) | LG 1 Computersysteme konfigurieren | Bit-Bahnhof, Platinenstadt, Dojo Seriell, Linux Unhatched, Docker Essentials → Laborserver v1, danach „eigener Container läuft“ bis v2 |
-| Netze (grün) | LG 2 Computernetzwerke planen | Dojo MAC, Topologien, Kabel, IPv4 → Laborserver v1 → Dojo OSI, Paketreise, Dojo Dienste, IPv6, Sicherheit → Abnahme |
+| Programmieren (rot) | LG 3 Algorithmen entwickeln und codieren | C++-Einstieg, Algorithmen-Koch, if-Entscheidung, Schleifen, Tresorknacker I, Funktionen, Arrays und Structs, Tresorknacker II, Dateiarbeit, Tresorknacker III → Laborserver Version 2 |
+| Systeme (blau) | LG 1 Computersysteme konfigurieren | Bit-Bahnhof, Platinenstadt, Linux Unhatched, Docker Essentials → Laborserver Version 1, danach „eigener Container läuft“ bis Version 2 |
+| Netze (grün) | LG 2 Computernetzwerke planen | Dojo Seriell, MAC, Topologien, Kabel, IPv4 → Laborserver Version 1 → Dojo OSI, Paketreise, Dojo Dienste, IPv6, Sicherheit → Abnahme |
 
-Dazu stehen auf der Zeitachse die Leistungsnachweise (Ex, SA 1, SA 2) mit ungefähren Terminen und eine Markierung für „heute“.
+Die Seite enthält bewusst keine Monate oder Termine. Die Reihenfolge von links nach rechts entspricht dem Ablauf im Unterricht.
 
 ## Stationsarten
 
@@ -31,7 +29,7 @@ Dazu stehen auf der Zeitachse die Leistungsnachweise (Ex, SA 1, SA 2) mit ungef�
 | kleiner Punkt | Unterrichtsthema | ohne Siegel |
 | Kasten | Laborserver | leuchtet, sobald die nötigen Einschübe online sind |
 
-Ein Klick auf eine Station zeigt Inhalt, Zeitraum, alle Siegel bzw. Gürtel und den Link zur Lernsituation. Ohne Auswahl steht dort der **nächste offene Halt**: die zeitlich erste Station, deren Ziel noch nicht erreicht ist. Er pulsiert auch im Plan.
+Ein Klick auf eine Station zeigt Inhalt, alle Siegel bzw. Gürtel und den Link zur Lernsituation. Ohne Auswahl steht dort der **nächste offene Halt**: die erste Station von links, deren Ziel noch nicht erreicht ist. Er pulsiert auch im Plan.
 
 ## Die Ausbaustufen des Laborservers
 
@@ -39,9 +37,9 @@ Ein Klick auf eine Station zeigt Inhalt, Zeitraum, alle Siegel bzw. Gürtel und 
 |---|---|---|
 | U1 Rechenkern | Bit-Bahnhof und Platinenstadt komplett | |
 | U2 Steuerlogik | Algorithmen-Koch Stufe 1–4, Tresorknacker Raum 1–3 | |
-| U3 Netzanschluss | Dojo Seriell (3 Gürtel), MAC (3), Topologien (2), Kabel (3), IPv4 (4), Linux und Docker abgehakt | Laborserver v1 |
+| U3 Netzanschluss | Dojo Seriell (3 Gürtel), MAC (3), Topologien (2), Kabel (3), IPv4 (4), Linux und Docker abgehakt | Laborserver Version 1 |
 | U4 Netzdienste & Sicherheit | Paketreise komplett, Dojo OSI (2), Dienste (3), IPv6 (2), Sicherheit (2) | |
-| U5 Messdaten-Auswertung | Algorithmen-Koch Stufe 5–6, Tresorknacker Raum 4–8, 10 und 11 | Laborserver v2 |
+| U5 Messdaten-Auswertung | Algorithmen-Koch Stufe 5–6, Tresorknacker Raum 4–8, 10 und 11 | Laborserver Version 2 |
 | U6 Bereit zur Abnahme | U1 bis U5 online | Abnahme |
 
 Das Labyrinth (Zeiger) im Tresorknacker ist Bonus und zählt nicht. Die Gürtelzahlen sind bewusst niedrig gewählt: Die ersten Gürtel decken den Unterrichtsstoff ab, die höheren sind Differenzierung. Wird ein Einschub neu online, erscheint eine kurze Meldung. Oben im Rack kann jeder seinen Hostnamen eintragen.
@@ -75,7 +73,7 @@ Folgen für den Unterricht:
 ## Ideen für den Unterricht
 
 - Zum Start jeder Sequenz den Linienplan zeigen: Wo stehen wir, was kommt als Nächstes, wozu brauchen wir das für den Laborserver?
-- Vor dem Labor im Februar kurz prüfen lassen, ob „Netzanschluss“ online ist. Wer noch Lücken hat, holt die fehlenden Gürtel nach.
+- Vor dem ersten Labor kurz prüfen lassen, ob „Netzanschluss“ online ist. Wer noch Lücken hat, holt die fehlenden Gürtel nach.
 - Vor der Abnahme als Checkliste nutzen: Welche Einschübe fehlen noch?
 
 ## Seite für ein anderes Fach (z. B. KoKI)
@@ -94,15 +92,14 @@ Eine Station ergänzen:
 }
 ```
 
-Dazu in `quellen` den Speicherschlüssel und die Stufen eintragen und die Station bei Bedarf in einer Ausbaustufe unter `bedingungen` aufführen. `monat` zählt ab Anfang September (0) bis Anfang Juli (10), `spur` 0/1/2 ist die obere, mittlere und untere Linie. Schräge Abschnitte in `wege` brauchen für 45° pro halber Spur 0,67 Monate.
+Dazu in `quellen` den Speicherschlüssel und die Stufen eintragen und die Station bei Bedarf in einer Ausbaustufe unter `bedingungen` aufführen. `monat` ist die Position von links (0 bis etwa 10,5; der Name stammt aus einer früheren Fassung mit Monaten), `spur` 0/1/2 ist die obere, mittlere und untere Linie. Schräge Abschnitte in `wege` brauchen für 45° pro halber Spur 0,67 Einheiten.
 
 ## Dateien
 
 | Datei | Inhalt |
 |---|---|
 | `index.html` | Seitengerüst |
-| `plan.js` | alle Inhalte: Linien, Stationen, Quellen der Siegel, Ausbaustufen, Leistungsnachweise |
-| `ohne-zeit.html`, `plan-ohne-zeit.js` | Variante ohne Zeitangaben; ändert nur Positionen und Texte aus `plan.js` |
+| `plan.js` | alle Inhalte: Linien, Stationen, Quellen der Siegel, Ausbaustufen |
 | `fahrplan.js` | Siegel einlesen, Linienplan als SVG zeichnen, Detailansicht, Rack |
 | `style.css` | Corporate Design der Jakob-Preh-Schule |
 | `assets/logo-jps.png` | Schullogo |
@@ -115,7 +112,6 @@ In VS Code mit der Erweiterung **Live Server** `index.html` öffnen. Lokal sieht
 
 - Reines HTML, CSS und JavaScript ohne Bibliotheken. Der Plan ist ein SVG und auf schmalen Bildschirmen waagrecht scrollbar.
 - Alle Zugriffe auf `localStorage` stehen in try/catch. Ist der Speicher gesperrt (privates Fenster), erscheint ein Hinweis.
-- Die Termine sind gerundet und folgen der didaktischen Jahresplanung. Sie sind nur eine Orientierung.
 
 ## Lizenz
 
