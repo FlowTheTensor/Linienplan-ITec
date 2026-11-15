@@ -215,33 +215,37 @@ function bogen(cx, cy, r, anteil) {
 
 function zeichnePlan() {
   const teile = [];
-  teile.push(`<svg viewBox="0 0 ${SVG_B} ${SVG_H}" role="img" aria-labelledby="plan-titel" xmlns="http://www.w3.org/2000/svg">`);
+  const vb = P.ohneZeit ? `60 50 ${SVG_B - 60} ${SVG_H - 50}` : `0 0 ${SVG_B} ${SVG_H}`;
+  teile.push(`<svg viewBox="${vb}" role="img" aria-labelledby="plan-titel" xmlns="http://www.w3.org/2000/svg">`);
   teile.push(`<title id="plan-titel">${esc(P.titel)}</title>`);
 
-  // Monatsraster
-  for (let m = 0; m < P.monate.length; m++) {
-    const x0 = X(m);
-    const halbjahr = m === P.halbjahrAb;
-    teile.push(`<line class="raster${halbjahr ? " halbjahr" : ""}" x1="${x0}" y1="52" x2="${x0}" y2="${SVG_H - 18}" />`);
-    teile.push(`<text class="monat" x="${X(m + 0.5)}" y="34">${P.monate[m]}</text>`);
-  }
-  teile.push(`<line class="raster" x1="${X(P.monate.length)}" y1="52" x2="${X(P.monate.length)}" y2="${SVG_H - 18}" />`);
-  teile.push(`<line class="achse" x1="${X(0)}" y1="52" x2="${X(P.monate.length)}" y2="52" />`);
-  teile.push(`<text class="halbjahr-text" x="${X(0) + 6}" y="${SVG_H - 26}">1. Halbjahr</text>`);
-  teile.push(`<text class="halbjahr-text" x="${X(P.halbjahrAb) + 6}" y="${SVG_H - 26}">2. Halbjahr</text>`);
+  if (!P.ohneZeit) {
+    // Monatsraster
+    for (let m = 0; m < P.monate.length; m++) {
+      const x0 = X(m);
+      const halbjahr = m === P.halbjahrAb;
+      teile.push(`<line class="raster${halbjahr ? " halbjahr" : ""}" x1="${x0}" y1="52" x2="${x0}" y2="${SVG_H - 18}" />`);
+      teile.push(`<text class="monat" x="${X(m + 0.5)}" y="34">${P.monate[m]}</text>`);
+    }
+    teile.push(`<line class="raster" x1="${X(P.monate.length)}" y1="52" x2="${X(P.monate.length)}" y2="${SVG_H - 18}" />`);
+    teile.push(`<line class="achse" x1="${X(0)}" y1="52" x2="${X(P.monate.length)}" y2="52" />`);
+    teile.push(`<text class="halbjahr-text" x="${X(0) + 6}" y="${SVG_H - 26}">1. Halbjahr</text>`);
+    teile.push(`<text class="halbjahr-text" x="${X(P.halbjahrAb) + 6}" y="${SVG_H - 26}">2. Halbjahr</text>`);
 
-  // Heute
-  const heute = heuteMonat();
-  if (heute !== null) {
-    teile.push(`<g class="heute"><line x1="${X(heute)}" y1="52" x2="${X(heute)}" y2="${SVG_H - 18}" /><text x="${X(heute)}" y="${SVG_H - 6}">heute</text></g>`);
-  }
+    // Heute
+    const heute = heuteMonat();
+    if (heute !== null) {
+      teile.push(`<g class="heute"><line x1="${X(heute)}" y1="52" x2="${X(heute)}" y2="${SVG_H - 18}" /><text x="${X(heute)}" y="${SVG_H - 6}">heute</text></g>`);
+    }
 
-  // Leistungsnachweise
-  P.nachweise.forEach((n) => {
-    const x = X(n.monat);
-    const b = n.name.length * 8 + 16;
-    teile.push(`<g class="nachweis" tabindex="0"><title>${esc(n.text)}</title><rect x="${x - b / 2}" y="41" width="${b}" height="22" rx="11" /><text x="${x}" y="56">${esc(n.name)}</text></g>`);
-  });
+    // Leistungsnachweise
+    P.nachweise.forEach((n) => {
+      const x = X(n.monat);
+      const b = n.name.length * 8 + 16;
+      teile.push(`<g class="nachweis" tabindex="0"><title>${esc(n.text)}</title><rect x="${x - b / 2}" y="41" width="${b}" height="22" rx="11" /><text x="${x}" y="56">${esc(n.name)}</text></g>`);
+    });
+
+  }
 
   // Linien
   Object.keys(P.wege).forEach((lid) => {
@@ -407,7 +411,9 @@ function zeichneDetail() {
   teile.push(`<div class="detail-inhalt">`);
   teile.push(`<div class="linienkopf">${linienKopf(st)}</div>`);
   teile.push(`<h2>${esc(st.name)}${st.kurz ? ` <span class="kurz">· ${esc(st.kurz)}</span>` : ""}</h2>`);
-  teile.push(`<p class="zeit">${esc(st.zeitraum)}</p>`);
+  if (!P.ohneZeit) {
+    teile.push(`<p class="zeit">${esc(st.zeitraum)}</p>`);
+  }
   teile.push(`<p>${esc(st.text)}</p>`);
   if (st.material) {
     teile.push(`<p class="material"><b>Material:</b> ${esc(st.material)}</p>`);

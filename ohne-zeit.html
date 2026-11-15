@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Christoph Rothaug, Jakob-Preh-Schule Bad Neustadt">
+    <!-- Lizenz: CC BY 4.0 – Christoph Rothaug, Jakob-Preh-Schule Bad Neustadt (ausgenommen Schullogo, Schriften; siehe README) -->
+    <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+    <title>Linienplan · Jakob-Preh-Schule</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="plan.js"></script>
+    <script src="plan-ohne-zeit.js"></script>
+    <script src="fahrplan.js"></script>
+</head>
+<body>
+    <header class="kopf">
+        <a class="logo" href="https://www.bsnes.de" target="_blank" rel="noopener"><img src="assets/logo-jps.png" alt="Jakob-Preh-Schule"></a>
+        <div class="kopf-text">
+            <h1 id="titel">Linienplan</h1>
+            <p id="untertitel"></p>
+        </div>
+        <div class="zaehler" id="zaehler" aria-live="polite"></div>
+    </header>
+
+    <main class="seite">
+        <section class="einleitung">
+            <p id="einleitung"></p>
+            <ul class="legende-linien" id="legende-linien"></ul>
+            <ul class="legende-symbole">
+                <li><span class="sym ls"></span>Lernsituation mit Prüfsiegeln</li>
+                <li><span class="sym kurs"></span>Kurs mit Gürteln oder Zertifikat</li>
+                <li><span class="sym info"></span>Unterrichtsthema</li>
+                <li><span class="sym hub"></span>Laborserver</li>
+            </ul>
+        </section>
+
+        <div class="raster-haupt">
+            <section class="panel karte">
+                <div class="panel-kopf"><span class="punkt"></span>Linienplan <small>Klick auf eine Station</small></div>
+                <div class="plan-scroll"><div id="plan" class="plan"></div></div>
+            </section>
+
+            <aside class="panel rack" aria-labelledby="rack-titel">
+                <div class="panel-kopf" id="rack-titel"><span class="punkt"></span>Dein Laborserver</div>
+                <div class="rack-inhalt">
+                    <label class="host">
+                        <span>Hostname</span>
+                        <span class="host-feld"><span class="prompt">$</span><input id="host" type="text" placeholder="laborserver-dein-name" maxlength="28" spellcheck="false" autocomplete="off"></span>
+                    </label>
+                    <p class="rack-status" id="rack-status"></p>
+                    <ol class="einschuebe" id="einschuebe"></ol>
+                    <p class="rack-hinweis">Jeder Einschub geht online, wenn die nötigen Prüfsiegel und Gürtel gesammelt sind. Klick auf einen Einschub, um zu sehen, was noch fehlt.</p>
+                </div>
+            </aside>
+
+            <section class="panel detail" id="detail" aria-live="polite"></section>
+        </div>
+
+        <section class="speicher-info">
+            <p id="hinweis-speicher" class="warnung" hidden>Dein Browser erlaubt hier keinen lokalen Speicher (z. B. im privaten Fenster). Prüfsiegel können dann weder gespeichert noch angezeigt werden.</p>
+            <p>Die Siegel speichern die Lernsituationen in <b>diesem Browser auf diesem Gerät</b>. Diese Seite liest sie nur aus, es wird nichts verschickt. Nutze deshalb immer denselben Laptop und denselben Browser, und lösche die Websitedaten nicht.</p>
+            <button type="button" class="knopf" id="neu-laden">Siegel neu einlesen</button>
+        </section>
+    </main>
+
+    <footer class="fuss">
+        <p>„Linienplan Informationstechnik“ von Christoph Rothaug, Jakob-Preh-Schule Bad Neustadt · <a href="https://creativecommons.org/licenses/by/4.0/deed.de" target="_blank" rel="noopener">CC BY 4.0</a> · <a href="https://www.bsnes.de" target="_blank" rel="noopener">bsnes.de</a></p>
+    </footer>
+
+    <div class="toast" id="toast" role="status"></div>
+</body>
+</html>

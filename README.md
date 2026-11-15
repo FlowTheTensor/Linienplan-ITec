@@ -6,6 +6,8 @@ Staatliche Fachschule für Elektrotechnik, Jakob-Preh-Schule Bad Neustadt a. d. 
 
 **Live:** <https://flowthetensor.github.io/Linienplan-ITec/>
 
+**Variante ohne Zeitangaben:** <https://flowthetensor.github.io/Linienplan-ITec/ohne-zeit.html> – ohne Monate, Leistungsnachweise und „heute“-Markierung. Alle drei Linien beginnen gleich weit links, Dojo · Seriell liegt auf der Netz-Linie und die Netz-Stationen sind gleichmäßig verteilt.
+
 ## Für wen?
 
 Für die Schülerinnen und Schüler. Das [Dashboard Lernsituationen](https://nerdifant.de/Dashboard-Lernsituationen/) bleibt die Linksammlung für die Lehrkraft. Der Linienplan zeigt den Ablauf des Fachs und den eigenen Fortschritt.
@@ -100,6 +102,7 @@ Dazu in `quellen` den Speicherschlüssel und die Stufen eintragen und die Statio
 |---|---|
 | `index.html` | Seitengerüst |
 | `plan.js` | alle Inhalte: Linien, Stationen, Quellen der Siegel, Ausbaustufen, Leistungsnachweise |
+| `ohne-zeit.html`, `plan-ohne-zeit.js` | Variante ohne Zeitangaben; ändert nur Positionen und Texte aus `plan.js` |
 | `fahrplan.js` | Siegel einlesen, Linienplan als SVG zeichnen, Detailansicht, Rack |
 | `style.css` | Corporate Design der Jakob-Preh-Schule |
 | `assets/logo-jps.png` | Schullogo |
