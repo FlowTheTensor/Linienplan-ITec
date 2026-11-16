@@ -868,6 +868,181 @@ a {
   color: var(--ink-faint);
 }
 
+
+/* ---------------- Umsteigen: Datenkrake ---------------- */
+.umstieg {
+  fill: none;
+  stroke: var(--ink-faint);
+  stroke-width: 4;
+  stroke-dasharray: 2 9;
+  stroke-linecap: round;
+}
+.ziel-ring {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 3;
+  stroke-dasharray: 5 4;
+}
+.ziel-grund {
+  fill: #fff;
+  stroke: var(--ink);
+  stroke-width: 3;
+}
+.ziel-kopf {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  fill: var(--ink-faint);
+  text-anchor: middle;
+}
+.ziel-name {
+  font-family: var(--titel);
+  font-size: 16px;
+  font-weight: 700;
+  fill: var(--ink);
+  text-anchor: middle;
+}
+.ziel-zeile {
+  font-size: 12px;
+  fill: var(--ink-soft);
+  text-anchor: middle;
+}
+.station:hover .ziel-ring, .station.gewaehlt .ziel-ring, .station:focus-visible .ziel-ring {
+  stroke: var(--accent);
+}
+.station:hover .ziel-name, .station.gewaehlt .ziel-name {
+  fill: var(--accent);
+}
+.umstieg-punkt {
+  background: repeating-linear-gradient(90deg, var(--ink-faint) 0 3px, transparent 3px 7px);
+}
+.wozu {
+  margin: 4px 0 14px;
+  padding: 12px 16px;
+  border-left: 4px solid var(--senf);
+  border-radius: 0 10px 10px 0;
+  background: #fbf3e4;
+  max-width: 90ch;
+}
+.wozu-kopf {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+  font-family: var(--titel);
+  font-weight: 700;
+}
+.wozu-kopf small {
+  font-family: Inter, Arial, sans-serif;
+  font-weight: 400;
+  font-size: 0.78rem;
+  color: var(--ink-faint);
+}
+.wozu-ico {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: url("assets/datenkrake/krake.webp") center / cover;
+  flex: none;
+}
+.wozu p {
+  margin: 0 0 6px;
+}
+.wozu-frage {
+  font-style: italic;
+  color: var(--ink-soft);
+}
+.wozu-frage::before {
+  content: "Frage aus der Anlage: ";
+  font-style: normal;
+  font-weight: 600;
+  color: var(--senf);
+}
+.medien {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+  margin: 0 0 14px;
+}
+.medien figure {
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--bg);
+}
+.medien img, .medien video {
+  display: block;
+  width: 100%;
+  max-height: 340px;
+  object-fit: contain;
+  background: #fff;
+}
+.medien figcaption {
+  padding: 6px 10px;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+.ziel-liste {
+  margin: 0 0 14px;
+  padding: 0;
+  list-style: none;
+  max-width: 100ch;
+}
+.ziel-liste li {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 12px;
+  padding: 6px 0;
+  border-top: 1px solid var(--line-soft);
+  font-size: 0.88rem;
+}
+.ziel-liste .link {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  font-weight: 600;
+  text-align: left;
+  color: var(--ink);
+  cursor: pointer;
+}
+.ziel-gruppe {
+  max-width: 100ch;
+  margin: 0 0 6px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--bg);
+}
+.ziel-gruppe summary {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.ziel-gruppe summary small {
+  font-weight: 400;
+  color: var(--ink-faint);
+}
+.ziel-gruppe .ziel-liste {
+  margin: 0;
+  padding: 0 12px 6px;
+}
+.ziel-liste .link:hover {
+  color: var(--accent);
+}
+.ziel-liste li > span {
+  color: var(--ink-soft);
+}
+.aktionen .knopf + .knopf {
+  margin-left: 6px;
+}
+
 /* ---------------- schmale Bildschirme ---------------- */
 @media (max-width: 1180px) {
   .raster-haupt {
@@ -885,6 +1060,10 @@ a {
   }
 }
 @media (max-width: 720px) {
+  .ziel-liste li {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
   .kopf {
     flex-wrap: wrap;
     gap: 10px 16px;

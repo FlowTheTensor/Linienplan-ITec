@@ -13,7 +13,7 @@ const SPEICHER_HAKEN = "fahrplan-" + P.fach + "-abgehakt";
 const SPEICHER_STAND = "fahrplan-" + P.fach + "-stand";
 const SPEICHER_HOST = "fahrplan-" + P.fach + "-host";
 
-const SVG_B = 1350;
+const SVG_B = P.breite || 1350;
 const SVG_H = 560;
 const SPUR_Y = [150, 300, 450];
 
@@ -257,6 +257,12 @@ function zeichnePlan() {
 
   }
 
+  // Umsteigen ins 2. Schuljahr (gestrichelt, ohne eigene Linie)
+  if (P.umstieg) {
+    const punkte = P.umstieg.map(([m, s]) => `${X(m).toFixed(1)},${Y(s).toFixed(1)}`).join(" ");
+    teile.push(`<polyline class="umstieg" points="${punkte}" />`);
+  }
+
   // Linien
   Object.keys(P.wege).forEach((lid) => {
     const farbe = P.linien[lid].farbe;
@@ -321,6 +327,16 @@ function zeichneStation(st, istHalt) {
     t.push(`<text class="hub-kopf" x="${x + 6}" y="${y - 4}">${esc(st.kopf)}</text>`);
     t.push(`<text class="hub-zeile" x="${x + 6}" y="${y + 13}">${esc(st.zeile)}</text>`);
     t.push(`</g>`);
+  } else if (st.typ === "ziel") {
+    t.push(`<clipPath id="clip-${st.id}"><circle cx="${x}" cy="${y}" r="33" /></clipPath>`);
+    t.push(`<circle class="ziel-ring" cx="${x}" cy="${y}" r="38" />`);
+    t.push(`<circle class="ziel-grund" cx="${x}" cy="${y}" r="33" />`);
+    if (st.symbol) {
+      t.push(`<image href="${esc(st.symbol)}" x="${x - 33}" y="${y - 33}" width="66" height="66" clip-path="url(#clip-${st.id})" preserveAspectRatio="xMidYMid slice" />`);
+    }
+    t.push(`<text class="ziel-kopf" x="${x}" y="${y - 50}">${esc(st.kopf || "")}</text>`);
+    t.push(`<text class="ziel-name" x="${x}" y="${y + 58}">${esc(st.name)}</text>`);
+    t.push(`<text class="ziel-zeile" x="${x}" y="${y + 75}">${esc(st.zeile || "")}</text>`);
   } else if (st.typ === "info") {
     t.push(`<circle class="ziel-flaeche" cx="${x}" cy="${y}" r="16" />`);
     t.push(`<circle class="info" cx="${x}" cy="${y}" r="6.5" stroke="${farbe}" />`);
@@ -345,7 +361,7 @@ function zeichneStation(st, istHalt) {
   }
 
   // Beschriftung
-  if (st.typ !== "hub") {
+  if (st.typ !== "hub" && st.typ !== "ziel") {
     const unten = st.spur >= 2;
     const dx = 10;
     const dy = unten ? 30 : -24;
@@ -374,6 +390,9 @@ function waehle(id) {
 }
 
 function linienKopf(st) {
+  if (st.typ === "ziel") {
+    return `<span class="linienpunkt umstieg-punkt"></span>${esc(st.kopf || "Umsteigen")}`;
+  }
   if (st.typ === "hub") {
     return `<span class="linienpunkt" style="background:#1d1d1c"></span>Laborserver`;
   }
@@ -433,6 +452,9 @@ function zeichneDetail() {
   if (st.material) {
     teile.push(`<p class="material"><b>Material:</b> ${esc(st.material)}</p>`);
   }
+  if (st.wozu) {
+    teile.push(wozuBox(st.wozu));
+  }
 
   if (st.typ === "hub" && !P.ohneSiegel) {
     const on = hubOnline(st);
@@ -468,13 +490,28 @@ function zeichneDetail() {
     teile.push(`<p class="beitrag">Baut am Laborserver: ${beitrag.map((u) => `<span class="chip">${esc(u.name)}</span>`).join(" ")}</p>`);
   }
 
-  if (st.link) {
-    const extern = !st.link.startsWith("https://flowthetensor.github.io/");
-    const knopf = st.typ === "ls" ? "Lernsituation öffnen" : "Kurs öffnen";
-    teile.push(`<p class="aktionen"><a class="knopf primaer" href="${esc(st.link)}"${extern ? ' target="_blank" rel="noopener"' : ""}>${knopf} →</a></p>`);
+  if (st.typ === "ziel") {
+    teile.push(zielUebersicht(st));
+  }
+  if (st.medien && st.medien.length) {
+    teile.push(medienListe(st.medien));
+  }
+
+  if (st.link || (st.links && st.links.length)) {
+    const knoepfe = [];
+    if (st.link) {
+      const knopf = st.knopf || (st.typ === "ls" ? "Lernsituation öffnen" : "Kurs öffnen");
+      knoepfe.push(linkKnopf(st.link, knopf + " →", true));
+    }
+    (st.links || []).forEach((l) => knoepfe.push(linkKnopf(l.url, l.text, false)));
+    teile.push(`<p class="aktionen">${knoepfe.join(" ")}</p>`);
   }
   teile.push(`</div>`);
   box.innerHTML = teile.join("");
+
+  box.querySelectorAll(".ziel-liste button.link").forEach((b) => {
+    b.addEventListener("click", () => waehle(b.dataset.station));
+  });
 
   const haken = $("#haken");
   if (haken) {
@@ -485,6 +522,56 @@ function zeichneDetail() {
       aktualisiere();
     });
   }
+}
+
+function linkKnopf(url, text, primaer) {
+  const extern = !url.startsWith("https://flowthetensor.github.io/");
+  return `<a class="knopf${primaer ? " primaer" : ""}" href="${esc(url)}"${extern ? ' target="_blank" rel="noopener"' : ""}>${esc(text)}</a>`;
+}
+
+// „Wozu im 2. Jahr?“ – Bezug zur Datenkrake
+function wozuBox(w) {
+  return `<div class="wozu"><div class="wozu-kopf"><span class="wozu-ico" aria-hidden="true"></span>Wozu brauchst du das? <small>Datenkrake · 2. Schuljahr</small></div>
+    <p>${esc(w.text)}</p>${w.frage ? `<p class="wozu-frage">${esc(w.frage)}</p>` : ""}</div>`;
+}
+
+// Fotos und Videos; fehlt eine Datei, verschwindet ihr Platz
+function medienListe(medien) {
+  const teile = medien.map((m) => {
+    const video = /\.(mp4|webm)$/i.test(m.datei);
+    const el = video
+      ? `<video src="${esc(m.datei)}" controls preload="metadata" playsinline onerror="this.closest('figure').remove()"></video>`
+      : `<img src="${esc(m.datei)}" alt="${esc(m.text || "")}" loading="lazy" onerror="bildFehlt(this)">`;
+    return `<figure>${el}${m.text ? `<figcaption>${esc(m.text)}</figcaption>` : ""}</figure>`;
+  });
+  return `<div class="medien">${teile.join("")}</div>`;
+}
+
+// fehlt ein Foto als .webp, nacheinander .jpg, .jpeg und .png versuchen
+const ERSATZ_ENDUNGEN = [".jpg", ".jpeg", ".png"];
+function bildFehlt(img) {
+  const versuch = Number(img.dataset.versuch || 0);
+  const basis = img.getAttribute("src").replace(/\.[a-z0-9]+$/i, "");
+  if (versuch < ERSATZ_ENDUNGEN.length) {
+    img.dataset.versuch = versuch + 1;
+    img.src = basis + ERSATZ_ENDUNGEN[versuch];
+  } else {
+    img.closest("figure").remove();
+  }
+}
+
+// Endstation: alle Bezüge auf einen Blick
+function zielUebersicht() {
+  const gruppen = Object.keys(P.linien).map((lid) => ({ name: "Linie " + P.linien[lid].name, farbe: P.linien[lid].farbe, filter: (s) => s.linie === lid }));
+  gruppen.push({ name: "Laborserver", farbe: "#1d1d1c", filter: (s) => s.typ === "hub" });
+  const teile = gruppen.map((g) => {
+    const zeilen = P.stationen
+      .filter((s) => s.wozu && s.typ !== "ziel" && g.filter(s))
+      .sort((a, b) => a.monat - b.monat)
+      .map((s) => `<li><button type="button" class="link" data-station="${s.id}">${esc(s.name)}</button><span>${esc(s.wozu.text)}</span></li>`);
+    return zeilen.length ? `<details class="ziel-gruppe"><summary><span class="linienpunkt" style="background:${g.farbe}"></span>${esc(g.name)} <small>${zeilen.length} Stationen</small></summary><ul class="ziel-liste">${zeilen.join("")}</ul></details>` : "";
+  });
+  return `<p class="fortschritt"><b>Was du aus dem 1. Jahr mitnimmst:</b></p>${teile.join("")}`;
 }
 
 // ---------------------------------------------------------------------

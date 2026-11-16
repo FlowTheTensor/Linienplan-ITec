@@ -6,7 +6,6 @@ Staatliche Fachschule für Elektrotechnik, Jakob-Preh-Schule Bad Neustadt a. d. 
 
 **Live:** <https://flowthetensor.github.io/Linienplan-ITec/>
 
-
 ## Die drei Linien
 
 | Linie | Lerngebiet | Stationen |
@@ -58,6 +57,18 @@ Folgen für den Unterricht:
 - Auf **nerdifant.de** würde der Linienplan keine Siegel sehen (anderer Ursprung). Er muss deshalb auf GitHub Pages unter `flowthetensor.github.io` laufen. Vom Dashboard aus kann er natürlich verlinkt werden.
 - Wird eine Lernsituation umbenannt oder ändert sich ihr Speicherschlüssel, muss `plan.js` angepasst werden.
 
+## Wozu brauchst du das? – Umsteigen in die Datenkrake
+
+Hinter der Abnahme endet der Plan in der Station **Umsteigen: Datenkrake**, der Lernsituation des 2. Schuljahres an der echten Modellanlage ([Datenkrake](https://flowthetensor.github.io/Datenkrake/)). Fast jede Station hat einen Kasten **„Wozu brauchst du das?“**: wo das Thema in der Datenkrake vorkommt, dazu eine **Frage aus der Anlage** als Einstieg. Die Endstation sammelt alle Bezüge nach Linien und verlinkt Leitstand und digitalen Zwilling.
+
+| Feld in `plan.js` | Inhalt |
+|---|---|
+| `wozu: { text, frage }` | Bezug zur Datenkrake und Einstiegsfrage |
+| `medien: [{ datei, text }]` | Fotos (`.webp`, `.jpg`, `.png`) oder Videos (`.mp4`, `.webm`) mit Bildunterschrift |
+| `typ: "ziel"` | Endstation mit rundem Bild (`symbol`) |
+
+Fotos und Videos der echten Anlage kommen in `assets/datenkrake/fotos/`. Welche Dateinamen der Plan dort erwartet, steht in [`assets/datenkrake/fotos/LIESMICH.md`](assets/datenkrake/fotos/LIESMICH.md). Fehlt eine Datei, bleibt ihr Platz leer. Die übrigen Bilder in `assets/datenkrake/` stammen aus dem Datenkrake-Repo.
+
 ## Bedienung
 
 | Aktion | Wirkung |
@@ -100,6 +111,7 @@ Dazu in `quellen` den Speicherschlüssel und die Stufen eintragen und die Statio
 | `fahrplan.js` | Siegel einlesen, Linienplan als SVG zeichnen, Detailansicht, Rack |
 | `style.css` | Corporate Design der Jakob-Preh-Schule |
 | `assets/logo-jps.png` | Schullogo |
+| `assets/datenkrake/` | Bilder aus der Datenkrake; `fotos/` für eigene Fotos und Videos der Modellanlage |
 
 ## Lokal starten
 
