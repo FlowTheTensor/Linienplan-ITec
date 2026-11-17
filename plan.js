@@ -21,12 +21,10 @@ const GUERTEL = [
   { id: "schwarz", name: "Schwarzer Gürtel", farbe: "#1d1d1c" }
 ];
 
-// die ersten n Gürtel (als Stufenliste bzw. als id-Liste)
+// die ersten n Gürtel – n muss der Gürtelzahl des Themas im Netzwerk-Dojo
+// entsprechen (siehe storeKey/belts in LS-Netzwerk-Dojo/assets/*-dojo.js)
 function guertel(n) {
   return GUERTEL.slice(0, n);
-}
-function ersteGuertel(n) {
-  return GUERTEL.slice(0, n).map((g) => g.id);
 }
 
 const LS_URL = "https://flowthetensor.github.io/";
@@ -240,7 +238,7 @@ const FAHRPLAN = {
       name: "Dojo · Seriell",
       text: "Serielle und parallele Schnittstellen: RS-232, UART, I²C und SPI, dazu das Paritätsbit. Die Gürtel holst du im Dojo-Training am Ende des Themas.",
       link: DOJO_URL + "#ser-grundlagen",
-      siegel: { quelle: "dojo-seriell", ziel: ersteGuertel(3) },
+      siegel: { quelle: "dojo-seriell" },
       wozu: {"text": "Mikrofon und Webcam hängen per USB an einer Dockingstation am Arduino UNO Q. Die Reihenfolge beim Einstecken entscheidet, ob die Geräte erkannt werden.", "frage": "Warum erkennt der Arduino das Mikrofon nicht?"},
       medien: [{"datei": "assets/datenkrake/fotos/dockingstation.webp", "text": "Arduino UNO Q, Dockingstation, Mikrofon und Webcam"}]
     },
@@ -268,7 +266,7 @@ const FAHRPLAN = {
       name: "Dojo · MAC",
       text: "MAC-Adressen, Switch und MAC-Tabelle.",
       link: DOJO_URL + "#mac-grundlagen",
-      siegel: { quelle: "dojo-mac", ziel: ersteGuertel(3) },
+      siegel: { quelle: "dojo-mac" },
       wozu: {"text": "Im Anlagen-Netz verbinden Switches die zehn SPS-Stationen mit dem Raspberry der Datenkrake.", "frage": "Woher weiß der Switch, an welchen Port ein Paket für die Presse muss?"},
       medien: [{"datei": "assets/datenkrake/fotos/switch-anlage.webp", "text": "Switch im Schaltschrank der Modellanlage"}]
     },
@@ -277,7 +275,7 @@ const FAHRPLAN = {
       name: "Dojo · Topologien",
       text: "Netzwerktopologien wie Stern, Bus und Ring.",
       link: DOJO_URL + "#topo-grundlagen",
-      siegel: { quelle: "dojo-topo", ziel: ersteGuertel(2) },
+      siegel: { quelle: "dojo-topo" },
       wozu: {"text": "Anlagen-Netz und Schulnetz sind getrennt. Der Raspberry hängt in beiden Netzen und verbindet sie.", "frage": "Wie zeichnest du ein Netz, in dem ein Gerät in zwei Netzen hängt?"}
     },
     {
@@ -285,7 +283,7 @@ const FAHRPLAN = {
       name: "Dojo · Kabel",
       text: "Kabel, Signale und Ethernet-Standards.",
       link: DOJO_URL + "#kabel-typen",
-      siegel: { quelle: "dojo-kabel", ziel: ersteGuertel(3) },
+      siegel: { quelle: "dojo-kabel" },
       wozu: {"text": "SPSen, Switches und der Raspberry sind per Ethernet verbunden. WLAN nutzt der Raspberry nur, um sich ins Schulnetz einzuwählen.", "frage": "Warum hängen die SPSen nicht einfach per WLAN am Netz?"}
     },
     {
@@ -293,7 +291,7 @@ const FAHRPLAN = {
       name: "Dojo · IPv4",
       text: "IPv4-Adressen und Subnetzmasken. Dazu planst du ein Netz im Packet Tracer.",
       link: DOJO_URL + "#grundlagen",
-      siegel: { quelle: "dojo-ipv4", ziel: ersteGuertel(4) },
+      siegel: { quelle: "dojo-ipv4" },
       wozu: {"text": "Die zehn SPS-Stationen haben feste Adressen im Anlagen-Netz 192.168.36.0/24, die Presse zum Beispiel 192.168.36.7.", "frage": "Welche IP-Adresse darf dein Laptop im Anlagen-Netz bekommen?"},
       medien: [{"datei": "assets/datenkrake/fotos/anlage-stationen.webp", "text": "Die Stationen der Modellanlage"}]
     },
@@ -302,7 +300,7 @@ const FAHRPLAN = {
       name: "Dojo · OSI",
       text: "Das OSI-Modell mit sieben Schichten. Du ordnest deinen Wireshark-Mitschnitt aus dem Labor den Schichten zu.",
       link: DOJO_URL + "#osi-grundlagen",
-      siegel: { quelle: "dojo-osi", ziel: ersteGuertel(2) },
+      siegel: { quelle: "dojo-osi" },
       wozu: {"text": "Ein Messwert reist von der SPS über OPC UA und MQTT bis in die Datenbank, durch alle Schichten des OSI-Modells.", "frage": "Auf welcher Schicht arbeitet MQTT?"}
     },
     {
@@ -319,7 +317,7 @@ const FAHRPLAN = {
       name: "Dojo · Dienste",
       text: "DHCP, DNS, URL und Ports.",
       link: DOJO_URL + "#dienst-dhcp",
-      siegel: { quelle: "dojo-dienste", ziel: ersteGuertel(3) },
+      siegel: { quelle: "dojo-dienste" },
       wozu: {"text": "Jeder Dienst der Datenkrake lauscht auf seinem eigenen Port, der OPC-UA-Server einer SPS zum Beispiel auf 4840.", "frage": "Wie findet dein Laptop die Adresse hinter datenkrake.local?"}
     },
     {
@@ -327,14 +325,14 @@ const FAHRPLAN = {
       name: "Dojo · IPv6",
       text: "Grundlagen von IPv6.",
       link: DOJO_URL + "#v6-grundlagen",
-      siegel: { quelle: "dojo-ipv6", ziel: ersteGuertel(2) }
+      siegel: { quelle: "dojo-ipv6" }
     },
     {
       id: "dojo-krypto", linie: "N", monat: 8.55, spur: 2, typ: "kurs",
       name: "Dojo · Sicherheit",
       text: "Symmetrische und asymmetrische Verschlüsselung, HTTPS und Zertifikate, Proxy und VPN.",
       link: DOJO_URL + "#sec-sym",
-      siegel: { quelle: "dojo-krypto", ziel: ersteGuertel(2) },
+      siegel: { quelle: "dojo-krypto" },
       wozu: {"text": "Die Anlage hängt nicht direkt am Internet. Der Raspberry sitzt zwischen Anlagen-Netz und Schulnetz und spannt bewusst kein eigenes WLAN auf.", "frage": "Warum darf die Anlage nicht direkt ins Internet?"}
     },
 
@@ -395,11 +393,11 @@ const FAHRPLAN = {
       id: "u3", name: "Netzanschluss",
       text: "Dein Laptop ist bereit für das Teamnetz: Schnittstellen, Switch, Kabel, Adressen, Linux und Docker.",
       bedingungen: [
-        { quelle: "dojo-seriell", station: "dojo-seriell", ids: ersteGuertel(3) },
-        { quelle: "dojo-mac", station: "dojo-mac", ids: ersteGuertel(3) },
-        { quelle: "dojo-topo", station: "dojo-topo", ids: ersteGuertel(2) },
-        { quelle: "dojo-kabel", station: "dojo-kabel", ids: ersteGuertel(3) },
-        { quelle: "dojo-ipv4", station: "dojo-ipv4", ids: ersteGuertel(4) },
+        { quelle: "dojo-seriell", station: "dojo-seriell" },
+        { quelle: "dojo-mac", station: "dojo-mac" },
+        { quelle: "dojo-topo", station: "dojo-topo" },
+        { quelle: "dojo-kabel", station: "dojo-kabel" },
+        { quelle: "dojo-ipv4", station: "dojo-ipv4" },
         { quelle: "linux", station: "linux" },
         { quelle: "docker", station: "docker" }
       ]
@@ -409,10 +407,10 @@ const FAHRPLAN = {
       text: "Du verstehst, was im Netz zwischen zwei Rechnern passiert, und findest typische Fehler.",
       bedingungen: [
         { quelle: "paketreise", station: "paketreise" },
-        { quelle: "dojo-osi", station: "dojo-osi", ids: ersteGuertel(2) },
-        { quelle: "dojo-dienste", station: "dojo-dienste", ids: ersteGuertel(3) },
-        { quelle: "dojo-ipv6", station: "dojo-ipv6", ids: ersteGuertel(2) },
-        { quelle: "dojo-krypto", station: "dojo-krypto", ids: ersteGuertel(2) }
+        { quelle: "dojo-osi", station: "dojo-osi" },
+        { quelle: "dojo-dienste", station: "dojo-dienste" },
+        { quelle: "dojo-ipv6", station: "dojo-ipv6" },
+        { quelle: "dojo-krypto", station: "dojo-krypto" }
       ]
     },
     {

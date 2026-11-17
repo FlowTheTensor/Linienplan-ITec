@@ -33,12 +33,12 @@ Ein Klick auf eine Station zeigt Inhalt, alle Siegel bzw. Gürtel und den Link z
 |---|---|---|
 | U1 Rechenkern | Bit-Bahnhof und Platinenstadt komplett | |
 | U2 Steuerlogik | Algorithmen-Koch Stufe 1–4, Tresorknacker Raum 1–3 | |
-| U3 Netzanschluss | Dojo Seriell (3 Gürtel), MAC (3), Topologien (2), Kabel (3), IPv4 (4), Linux und Docker abgehakt | Laborserver Version 1 |
-| U4 Netzdienste & Sicherheit | Paketreise komplett, Dojo OSI (2), Dienste (3), IPv6 (2), Sicherheit (2) | |
+| U3 Netzanschluss | alle Gürtel in Dojo Seriell (6), MAC (5), Topologien (4), Kabel (5) und IPv4 (8), Linux und Docker abgehakt | Laborserver Version 1 |
+| U4 Netzdienste & Sicherheit | Paketreise komplett, alle Gürtel in Dojo OSI (4), Dienste (6), IPv6 (6) und Sicherheit (6) | |
 | U5 Messdaten-Auswertung | Algorithmen-Koch Stufe 5–6, Tresorknacker Raum 4–8, 10 und 11 | Laborserver Version 2 |
 | U6 Bereit zur Abnahme | U1 bis U5 online | Abnahme |
 
-Das Labyrinth (Zeiger) im Tresorknacker ist Bonus und zählt nicht. Die Gürtelzahlen sind bewusst niedrig gewählt: Die ersten Gürtel decken den Unterrichtsstoff ab, die höheren sind Differenzierung. Wird ein Einschub neu online, erscheint eine kurze Meldung. Oben im Rack kann jeder seinen Hostnamen eintragen.
+Das Labyrinth (Zeiger) im Tresorknacker ist Bonus und zählt nicht. In jedem Dojo-Kurs zählen alle Gürtel, die das Netzwerk-Dojo für das Thema vergibt. Wird ein Einschub neu online, erscheint eine kurze Meldung. Oben im Rack kann jeder seinen Hostnamen eintragen.
 
 ## Woher kommen die Siegel?
 
